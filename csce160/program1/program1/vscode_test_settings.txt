@@ -1,0 +1,10 @@
+"python.terminal.executeInFileDir": true,
+"python.testing.pytestEnabled": true,
+"python.testing.autoTestDiscoverOnSaveEnabled": false,
+"python.testing.pytestArgs": [
+    "-v",
+    "--ignore=book_source_code/"
+],
+"[python]": {
+    "editor.codeLens": false
+}
