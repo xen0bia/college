@@ -3,25 +3,26 @@ Chapter 3
 Zynab Ali
 """
 
-#Number range corresponds to day of week
-x = int(input("\nEnter a number between 1-7:"))
+# Number range corresponds to day of week
+def main():
+    day = int(input('\nEnter a number between 1 and 7:'))
+    if day == 1:
+        print('Monday\n')
+    elif day == 2:
+        print('Tuesday\n')
+    elif day == 3:
+        print('Wednesday\n')
+    elif day == 4:
+        print('Thursday\n')
+    elif day == 5:
+        print('Friday\n')
+    elif day == 6:
+        print('Saturday\n')
+    elif day == 7:
+        print('Sunday\n')
+    else:
+        print('Error. Value is outside perameters.\n')
 
-#Days of week
-if x == 1:
-    print('Monday\n')
-if x == 2:
-    print('Tuesday\n')
-if x == 3:
-    print('Wednesday\n')
-if x == 4:
-    print('Thursday\n')
-if x == 5:
-    print('Friday\n')
-if x == 6:
-    print('Saturday\n')
-if x == 7:
-    print('Sunday\n')
 
-#This is an error!
-if x < 1 or x > 7:
-    print("Error. Value is outside perameters.\n")
+if __name__ == '__main__':
+    main()
