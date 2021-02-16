@@ -3,8 +3,8 @@ Chapter 3
 Zynab Ali
 """
 
-# Number range corresponds to day of week
 def main():
+    # Number range corresponds to day of week
     day = int(input('\nEnter a number between 1 and 7:'))
     if day == 1:
         print('Monday\n')

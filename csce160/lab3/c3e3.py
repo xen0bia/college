@@ -10,13 +10,14 @@ def main():
 
     #Determine life stage based off of the age inputted
     if age <= 1:
-        print('The person is an infant.\n')
+        print('This person is an infant.\n')
     elif age < 13:
-        print('The person is a child.\n')
+        print('This person is a child.\n')
     elif age < 20:
-        print('The person is a teenager.\n')
+        print('This person is a teenager.\n')
     else:
-        print('The person is an adult.\n')
+        print('This person is an adult.\n')
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     main()
