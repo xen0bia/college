@@ -8,12 +8,13 @@ INITIAL_TUITION = 8000.0
 YEARS = 5
 
 def print_year(year, tuition):
-    print(f'{year}\t{tuition:.2f}')
+    print(f'{year}\t${tuition:.2f}')
 
 def main():
     print() #first line seperator
-    #tuition = INITIAL_TUITION
-
+    print('Year\tTuition Rate')
+    print('----\t------------')
+    
     #compute rate: 3% increase for next five years
     saved_tuitions = []  #[8000, 8240, ...]
     for year in range(1, YEARS + 1):
