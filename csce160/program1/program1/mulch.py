@@ -1,42 +1,27 @@
 '''
 mulch.py
-Name: [your name]
+Zynab Ali
 '''
 
-# TODO Remove all TODO comments before turning in your program.
-# TODO Format your code before turning it in and run all unit tests to ensure they pass.
+import math
 
 def get_cubic_yards():
-    '''
-    Prompt the user for the length in feet, width in feet and depth in inches.
-    Assumes that the user enters integer values greater than 0 for all 3 values.
-    Calculate the cubic yards (length x width X depth/12 / 27) based on the input values.
-    Return the cubic yards.
-    '''
+    # Mulch Cost Calculator
+    print('\nMulch Cost Calculator')
+    print('======================')
+    print()
+    length = int(input('Enter the length of the planting bed, in feet: '))
+    width = int(input('Enter the width of the planting bed, in feet: '))
+    depth = int(input('Enter the desired depth of mulch, in inches: '))
 
-    # TODO Replace 0 with the cubic yards calculated
-    return 0
-
-
+    return (length * width * (depth/12))/27
 
 def calculate_mulch_cost(cubic_yards):
-    '''
-    Calculate cost of the mulch based on the cubic yards being ordered.
-    Cubic yards	    Cost per cubic yard
-    -----------     --------------------------------------------------
-    <= 5            $36 per cubic yard (minimum order is 3 yards)
-
-    > 5 and <= 10   $36 per cubic yard for the first 5 cubic yards plus
-                    $33 per cubic yard for each cubic yard over 5
-
-    > 10            $36 per cubic yard for the first 5 cubic yards plus
-                    $33 per cubic yard for each cubic yard over 5 up to 10 plus
-                    $30 per cubic yard for each cubic yard over 10
-    '''
-
-    # TODO Replace 0 with calculated mulch cost
-    return 0
-
+    if cubic_yards <= 5:
+        return cubic_yards*36
+    elif cubic_yards <= 10:
+        return 5*36 + (cubic_yards - 5)*33
+    return 5*36 + 5*33 + (cubic_yards - 10)*30
 
 def main():
     '''
@@ -44,8 +29,50 @@ def main():
     The customer can enter the dimensions for more than one planting bed.
     The total mulch for all planting beds should be rounded up to the next cubic foot before
     calculating the total cost of the mulch and applicable sales tax.
-    The mulch cost, sales tax, delivery charge and total cost is displated to the user.
+    The mulch cost, sales tax, delivery charge and total cost is displayed to the user.
     '''
+    # Get cubic_yards.
+    cubic_yards = 0
+    while True:
+        cubic_yards += get_cubic_yards()
+        resp = input('Enter the dimensions for another planting bed (y/n): ')
+        if resp == 'n':
+            break
+    
+    # Round cubic_yards up to nearest integer.
+    cubic_yards = math.ceil(cubic_yards)
+
+    # Display amount of mulch required
+    print()
+    print(f'Total mulch required is approximately {cubic_yards} cubic yards.')
+
+    # Minimum mulch order needs to be at least 3 cubic yards
+    if cubic_yards < 3:
+        cubic_yards = 3
+        print('The minimum mulch order is 3 cubic yards.')
+
+    # Calculate mulch cost
+    mulch_cost = calculate_mulch_cost(cubic_yards)
+
+    # Calculate delivery charge
+    print()
+    distance = int(input('Enter your distance from Naperville, IL, in miles: '))
+    delivery_charge = max([distance*4.25, 35])
+
+    # Calculate sales tax
+    sales_tax = mulch_cost*0.07
+
+    # Calculate total cost
+    total_cost = mulch_cost + delivery_charge + sales_tax
+
+    # Display total cost and align price
+    print()
+    print(f'Cost for {cubic_yards} cubic yards of mulch')
+    print('================================')
+    print(f'          Mulch: $ {f"{mulch_cost:.2f}".rjust(7)}')
+    print(f'Delivery charge: $ {f"{delivery_charge:.2f}".rjust(7)}')
+    print(f'      Sales tax: $ {f"{sales_tax:.2f}".rjust(7)}')
+    print(f'     Total cost: $ {f"{total_cost:.2f}".rjust(7)}\n')
 
 if __name__ == "__main__":
     main()
