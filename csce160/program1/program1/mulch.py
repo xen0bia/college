@@ -24,13 +24,6 @@ def calculate_mulch_cost(cubic_yards):
     return 5*36 + 5*33 + (cubic_yards - 10)*30
 
 def main():
-    '''
-    Compute the cost of mulch based on the size of each plantng bed entered by the user.
-    The customer can enter the dimensions for more than one planting bed.
-    The total mulch for all planting beds should be rounded up to the next cubic foot before
-    calculating the total cost of the mulch and applicable sales tax.
-    The mulch cost, sales tax, delivery charge and total cost is displayed to the user.
-    '''
     # Get cubic_yards.
     cubic_yards = 0
     while True:
