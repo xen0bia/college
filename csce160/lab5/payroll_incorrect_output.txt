@@ -1,0 +1,58 @@
+# ============================================================
+# Test case 1
+# Regular hours worked (no overtime)
+# Gross pay under $5000
+# ============================================================
+Enter the number of hours worked this week: 40
+Enter the hourly pay rate: 10
+This individual did not work overtime.
+The gross pay is $ 400.00
+You earned more than $5,000 this week!
+
+# ============================================================
+# Test case 2
+# Overtime hours worked
+# Gross pay under $5000
+# ============================================================
+Enter the number of hours worked this week: 50
+Enter the hourly pay rate: 10
+This individual worked overtime.
+The gross pay is $ 550.00
+The gross pay is $ 500.00
+You earned more than $5,000 this week!
+
+# ============================================================
+# Test case 3
+# Regular hours worked (no overtime)
+# Gross pay over $5000
+# ============================================================
+Enter the number of hours worked this week: 40
+Enter the hourly pay rate: 130
+This individual did not work overtime.
+The gross pay is $ 5200.00
+Congratulations!
+You earned more than $5,000 this week!
+
+# ============================================================
+# Test case 4
+# Overtime hours worked
+# Gross pay over $5000
+# ============================================================
+Enter the number of hours worked this week: 50
+Enter the hourly pay rate: 130   
+This individual worked overtime.
+The gross pay is $ 7150.00
+The gross pay is $ 6500.00
+Congratulations!
+You earned more than $5,000 this week!
+
+# ============================================================
+# Test case 5
+# Under 40 hours worked
+# Gross pay under $5000
+# ============================================================
+Enter the number of hours worked this week: 39
+Enter the hourly pay rate: 10
+This individual did not work overtime.
+The gross pay is $ 390.00
+You earned more than $5,000 this week!
