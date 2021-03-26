@@ -5,31 +5,18 @@ Zynab Ali
 
 import random
 
-# -----------------------------------
-# global constants
 WORDLIST_FILENAME = "words.txt"
 ALL_LETTERS = 'abcdefghijklmnopqrstuvwxyz'
 VOWELS = 'aeiou'
 MAX_GUESSES = 6
 MAX_WARNINGS = 3
-# end of global constants
-# -----------------------------------
 
-# -----------------------------------
 # Helper code
-# You don't need to understand this helper code,
-# but you will have to know how to use the functions
-# (so be sure to read the docstrings!)
-
-
 def load_words():
     '''
     Returns a list of valid words. Words are strings of lowercase letters.
-
-    Depending on the size of the word list, this function may
-    take a while to finish.
     '''
-    print("Loading word list from file...")
+    print("\nLoading word list from file...")
     word_file = open(WORDLIST_FILENAME, 'r')
     line = word_file.readline()
     word_file.close()
@@ -38,20 +25,20 @@ def load_words():
     print("  ", len(wordlist), "words loaded.")
     return tuple(wordlist)
 
-
 def choose_word(wordlist):
     '''
     wordlist (list): list of words (strings)
     Returns a word from wordlist at random
     '''
     return random.choice(wordlist)
-
 # end of helper code
-# -----------------------------------
-
 
 def is_word_guessed(secret_word, letters_guessed):
     '''
+    Determines if all the letters in the secret_word have been guessed.
+    Iterates over each letter in the secret_word to check if the letter is
+    in letters_guessed. Return True if all letters have been guessed.
+    
     secret_word: string, the word the user is guessing;
       assumes all letters are lowercase
     letters_guessed: list (of letters), which letters have been guessed so far;
@@ -59,43 +46,56 @@ def is_word_guessed(secret_word, letters_guessed):
     returns: boolean, True if all the letters of secret_word are in letters_guessed;
       False otherwise
     '''
-    # TODO FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
+    for char in secret_word:
+        if char not in letters_guessed:
+            return False
+    return True
 
 def get_guessed_word(secret_word, letters_guessed):
     '''
+    This function creates a guessed_word that consists of '_ ' for each letter not
+    yet guessed and letters that have been guessed.
+
     secret_word: string, the word the user is guessing
     letters_guessed: list (of letters), which letters have been guessed so far
     returns: string, comprised of letters, underscores (_), and spaces that represents
       which letters in secret_word have been guessed so far.
     '''
-    # TODO FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
+    s = ''
+    for char in secret_word:
+        if char in letters_guessed:
+            s += f'{char}'
+        else:
+            s += '_ '
+    return s
 
 def get_available_letters(letters_guessed):
     '''
+    Returns a list of letters that have not yet been guessed.
+    Use the constant ALL_LETTERS and parameter, letters_guessed to determine
+    the letters not yet guessed.
+    
     letters_guessed: list (of letters), which letters have been guessed so far
     returns: string (of letters), comprised of letters that represents which letters have not
       yet been guessed.
     '''
-    # TODO FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
+    letters_guessed = [x.lower() for x in letters_guessed]
+    return ''.join([x for x in ALL_LETTERS if x not in letters_guessed])
 
 def invalid_guess(warnings_remaining, guesses_remaining):
     '''
     Call this function when the user enters a letter already guessed or
     a symbol that is not a letter.
     This function returns new values for warnings and guesses remaining.
-    warnings_remaining: int, the warnings remainin before the incorrect guess
+    warnings_remaining: int, the warnings remaining before the incorrect guess
     guesses_remaining: int, the guesses remaining before the incorrect guess
     returns: int, int, the number of warnings and guesses remaining after the invalid guess
     '''
-    # TODO FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
+    if warnings_remaining <= 0:
+        if guesses_remaining <= 0:
+            return (warnings_remaining, guesses_remaining)
+        return (warnings_remaining, max(guesses_remaining - 1, 0))
+    return (max(warnings_remaining - 1, 0), guesses_remaining)
 
 def incorrect_guess(guessed_letter, guesses_remaining):
     '''
@@ -107,9 +107,9 @@ def incorrect_guess(guessed_letter, guesses_remaining):
     guesses_remaining: int, the guesses remaining before the incorrect guess
     returns: int, the number of guesses remaining after incorrect bad guess
     '''
-    # TODO FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
+    if guessed_letter in VOWELS:
+        return max(guesses_remaining - 2, 0)
+    return max(guesses_remaining - 1, 0)
 
 def calculate_score(guesses_remaining, secret_word):
     '''
@@ -119,11 +119,9 @@ def calculate_score(guesses_remaining, secret_word):
     secret_word, string, the secret word
     returns: int, the score if guesses_remaining is > 0; otherwise, 0.
     '''
-    # TODO FILL IN YOUR CODE HERE AND DELETE "pass"
-    score = guesses_remaining*len(secret_word)
+    score = guesses_remaining*len(set(secret_word))
     return score
     #Re:need to count the letters w/o counting the duplicates!!
-
 
 def prompt_for_letter(guesses_remaining, warnings_remaining, available_letters):
     '''
@@ -135,9 +133,10 @@ def prompt_for_letter(guesses_remaining, warnings_remaining, available_letters):
     available_letters, string, available letters for the user to choose from.
     returns: string, lowercased letter input by the user
     '''
-    # TODO FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
+    print(f'You have {guesses_remaining} guesses left.')
+    print(f'You have {warnings_remaining} warnings left.')
+    print(f'Available letters: {available_letters}')
+    return input('Enter a letter: ')
 
 def display_game_outcome(score, secret_word):
     '''
@@ -149,9 +148,12 @@ def display_game_outcome(score, secret_word):
     score, int, the user's score
     secret_word, string, the secret word
     '''
-    # TODO FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
+    if score > 0:
+        print('Congratulations, you won!')
+        print(f'Your total score for this game is: {score}')
+    else:
+        print('Sorry, you ran out of guesses.')
+        print(f'The word was {secret_word}.')
 
 def match_with_gaps(my_word, other_word):
     '''
@@ -162,30 +164,30 @@ def match_with_gaps(my_word, other_word):
         _ , and my_word and other_word are of the same length;
         False otherwise: 
     '''
-    # TODO FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
+    my_word = my_word.replace(' ', '')
+    other_word = other_word.replace(' ', '')
+    if len(my_word) != len(other_word):
+        return False
+    for i in range(len(my_word)):
+        if my_word[i] == '_':
+            continue
+        if my_word[i] != other_word[i]:
+            return False
+    return True
 
 def main():
     '''
     secret_word: string, the secret word to guess.
-
     Starts up an interactive game of Hangman.
-
     * At the start of the game, let the user know how many
       letters the secret_word contains and how many guesses s/he starts with.
-
     * The user should start with 6 guesses
-
     * Before each round, you should display to the user how many guesses
       s/he has left and the letters that the user has not yet guessed.
-
     * Ask the user to supply one guess per round. Remember to make
       sure that the user puts in a letter!
-
     * The user should receive feedback immediately after each guess
       about whether their guess appears in the secret word.
-
     * After each guess, you should display to the user the
       partially guessed word so far.
 
@@ -214,17 +216,28 @@ def main():
 
     print("\nLet's play:", guessed_word)
 
-    # ############################################################
-    # TODO Complete the mainline processing in this main function
-    # Hint: The part you have to complete will be in a while loop
-    # ############################################################
+    while True:
+        if guesses_remaining <= 0:
+            break
+
+        letter = prompt_for_letter(guesses_remaining, warnings_remaining, available_letters)[0].lower()
+        if letter not in ALL_LETTERS or letter in letters_guessed:
+            warnings_remaining, guesses_remaining = invalid_guess(warnings_remaining, guesses_remaining)
+        else:
+            letters_guessed += letter
+            if letter not in secret_word:
+                print(f"Oops! That letter is not in my word: {get_guessed_word(secret_word, letters_guessed)}")
+                guesses_remaining = incorrect_guess(letter, guesses_remaining)
+            else:
+                if is_word_guessed(secret_word, letters_guessed):
+                    break
+                else:
+                    print(f"Good guess: {get_guessed_word(secret_word, letters_guessed)}")
+        guessed_word = get_guessed_word(secret_word, letters_guessed)
+        available_letters = get_available_letters(letters_guessed)
 
     score = calculate_score(guesses_remaining, secret_word)
     display_game_outcome(score, secret_word)
 
-
-# -----------------------------------------
-# Call the main function to start the game
-# -----------------------------------------
 if __name__ == "__main__":
     main()
